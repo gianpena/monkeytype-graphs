@@ -3,5 +3,6 @@
 .idea/
 *.csv
 *.txt
+!requirements.txt
 *.html
 *.json
