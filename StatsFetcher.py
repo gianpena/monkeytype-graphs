@@ -1,4 +1,4 @@
-import requests,sys
+import requests,sys,json
 from time import sleep
 class StatsFetcher:
     def __init__(self, language='english', mode='time', mode2='60'):
@@ -12,7 +12,7 @@ class StatsFetcher:
             r = requests.get(f'https://api.monkeytype.com/leaderboards?language={language}&mode={mode}&mode2={mode2}&page={page}&pageSize=200').json()
 
         self.aggregated_data.extend(r['data']['entries'])
-        print(self.aggregated_data)
+        print(json.dumps(self.aggregated_data))
 
 
 
