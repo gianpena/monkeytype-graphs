@@ -14,7 +14,7 @@ async function writeStatsToFile(stats) {
 
 }
 
-let page = 1;
+let page = args[2] ? parseInt(args[2]) : 0;
 
 async function fetchStats() {
 
@@ -23,14 +23,10 @@ async function fetchStats() {
     for(; isPageComplete && page < lastPage; ++page) {
         const requestStr = `https://api.monkeytype.com/leaderboards?language=english&mode=${args[0]}&mode2=${args[1]}&page=${page}&pageSize=200`;
         const response = await fetch(requestStr);
-        if(!response.ok) {
-            console.log(`Something went wrong on the following request:\n${requestStr}`);
-            return;
-        }
         const { data } = await response.json();
         if(!data) {
             console.log(`Request successful but no data found:\n${requestStr}`);
-            return;
+            return false;
         }
         const { entries } = data;
         await writeStatsToFile(entries);
