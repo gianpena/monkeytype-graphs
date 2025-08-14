@@ -31,7 +31,7 @@ async function fetchStats() {
         const { entries } = data;
         await writeStatsToFile(entries);
         
-        isPageComplete = data && entries.length === 200;
+        isPageComplete = entries && entries.length === 200;
 
     }
 
