@@ -6,3 +6,4 @@
 !requirements.txt
 *.html
 *.json
+**/node_modules
