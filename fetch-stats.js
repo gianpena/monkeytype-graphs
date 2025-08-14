@@ -6,7 +6,7 @@ async function writeStatsToFile(stats) {
     const filePath = `./${args[0]}${args[1]}.json`;
     try {
         const fileContent = fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : '[]';
-        const existingStats = [JSON.parse(fileContent), ...stats ];
+        const existingStats = [...JSON.parse(fileContent), ...stats ];
         fs.writeFileSync(filePath, JSON.stringify(existingStats, null, 2));
     } catch (err) {
         console.error(`Error reading or writing ${filePath}:`, err);
@@ -17,7 +17,7 @@ async function writeStatsToFile(stats) {
 let page = 1;
 
 async function fetchStats() {
-    
+
     let isPageComplete = true;
     let lastPage = page + 500;
     for(; isPageComplete && page < lastPage; ++page) {
