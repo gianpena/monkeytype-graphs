@@ -23,6 +23,10 @@ async function fetchStats() {
     for(; isPageComplete && page < lastPage; ++page) {
         const requestStr = `https://api.monkeytype.com/leaderboards?language=english&mode=${args[0]}&mode2=${args[1]}&page=${page}&pageSize=200`;
         const response = await fetch(requestStr);
+        if(response.status === 429) {
+            console.log(`Ratelimited on ${requestStr}.`);
+            return false;
+        }
         const { data } = await response.json();
         if(!data) {
             console.log(`Request successful but no data found:\n${requestStr}`);
