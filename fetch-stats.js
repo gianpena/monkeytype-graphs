@@ -25,7 +25,7 @@ async function fetchStats() {
         const response = await fetch(requestStr);
         if(response.status === 429) {
             console.log(`Ratelimited on ${requestStr}.`);
-            return false;
+            return true;
         }
         const { data } = await response.json();
         if(!data) {
