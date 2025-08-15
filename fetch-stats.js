@@ -45,7 +45,7 @@ async function fetchStats() {
 
 const callback = async () => {
     const isComplete = await fetchStats();
-    if(isComplete) process.exit(0);
+    if(!isComplete) process.exit(0);
 };
 callback();
 setInterval(callback, 1 * 60 * 60 * 1000 + 10000);
